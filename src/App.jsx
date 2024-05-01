@@ -7,8 +7,6 @@ import styles from "./App.module.css";
 import { nanoid } from "nanoid";
 
 function App() {
-  //   model.id = nanoid();
-
   const [contacts, setContacts] = useState(() => {
     const savedContacts = JSON.parse(
       window.localStorage.getItem("saved-contacts")
