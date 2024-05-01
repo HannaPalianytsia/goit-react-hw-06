@@ -2,8 +2,18 @@ import { useId } from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import styles from "./ContactForm.module.css";
+import { useDispatch } from "react-redux";
+import { addContact } from "../../redux/contactsSlice";
 
-const ContactForm = ({ handleSubmit }) => {
+const ContactForm = () => {
+  const dispatch = useDispatch();
+
+  // console.log(values.name, values.number);
+  const handleSubmit = (values, actions) => {
+    dispatch(addContact(values.name, values.number));
+    actions.resetForm();
+  };
+
   const nameFieldId = useId();
   const numberFieldId = useId();
 
@@ -17,6 +27,7 @@ const ContactForm = ({ handleSubmit }) => {
       .max(50, "Too Long!")
       .required("Required"),
   });
+
   return (
     <div>
       <Formik
